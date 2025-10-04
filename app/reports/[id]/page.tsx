@@ -42,7 +42,6 @@ export default function ReportDetailPage() {
   const router = useRouter();
   const params = useParams();
   const { user } = useAuth();
-  const supabase = createClientComponentClient();
 
   const [report, setReport] = useState<ReportDetail | null>(null);
   const [loading, setLoading] = useState(true);
