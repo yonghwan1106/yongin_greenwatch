@@ -16,7 +16,8 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(git log:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Header } from '@/components/layout/Header';
 import { REPORT_TYPES, ReportType } from '@/lib/types/report';
 import { supabase } from '@/lib/supabase/client';
 
@@ -131,17 +132,9 @@ export default function NewReportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 헤더 */}
-      <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <button onClick={() => router.back()} className="text-gray-600">
-            ← 돌아가기
-          </button>
-          <h1 className="text-xl font-bold">환경 문제 제보</h1>
-          <div className="w-20" />
-        </div>
-      </div>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 pt-20">
 
       {/* 진행 단계 표시 */}
       <div className="bg-white border-b">
@@ -384,6 +377,7 @@ export default function NewReportPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

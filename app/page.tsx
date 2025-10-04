@@ -58,12 +58,6 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-blue-700">
-            ℹ️ MVP 개발 진행 중 - Phase 1 기능이 순차적으로 추가됩니다
-          </p>
-        </div>
       </div>
       </main>
     </>
