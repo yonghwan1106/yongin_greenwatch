@@ -167,60 +167,65 @@ export default function ReportsPage() {
                   key={report.id}
                   className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
                 >
-                  {/* 이미지 */}
-                  {report.media.length > 0 && (
-                    <div className="aspect-video bg-gray-200 relative">
-                      <img
-                        src={report.media[0].media_url}
-                        alt="제보 이미지"
-                        className="w-full h-full object-cover"
-                      />
-                      <div
-                        className="absolute top-2 right-2 px-2 py-1 rounded text-white text-xs font-medium"
-                        style={{ backgroundColor: statusColor }}
-                      >
-                        {STATUS_TEXT[report.status]}
+                  <Link href={`/reports/${report.id}`}>
+                    {/* 이미지 */}
+                    {report.media.length > 0 && (
+                      <div className="aspect-video bg-gray-200 relative cursor-pointer">
+                        <img
+                          src={report.media[0].media_url}
+                          alt="제보 이미지"
+                          className="w-full h-full object-cover"
+                        />
+                        <div
+                          className="absolute top-2 right-2 px-2 py-1 rounded text-white text-xs font-medium"
+                          style={{ backgroundColor: statusColor }}
+                        >
+                          {STATUS_TEXT[report.status]}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 내용 */}
+                    <div className="p-4 cursor-pointer">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-2xl">{typeInfo.emoji}</span>
+                        <span className="font-semibold">{typeInfo.label}</span>
+                      </div>
+
+                      {report.description && (
+                        <p className="text-sm text-gray-700 mb-2 line-clamp-2">
+                          {report.description}
+                        </p>
+                      )}
+
+                      {report.address && (
+                        <p className="text-xs text-muted-foreground mb-3">
+                          📍 {report.address}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleEmpathy(report.id);
+                          }}
+                          className={`flex items-center gap-1 text-sm ${
+                            report.hasEmpathized
+                              ? 'text-red-500 font-medium'
+                              : 'text-gray-500 hover:text-red-500'
+                          }`}
+                        >
+                          {report.hasEmpathized ? '❤️' : '🤍'} 공감{' '}
+                          {report.empathy_count}
+                        </button>
+
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(report.created_at).toLocaleDateString('ko-KR')}
+                        </span>
                       </div>
                     </div>
-                  )}
-
-                  {/* 내용 */}
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">{typeInfo.emoji}</span>
-                      <span className="font-semibold">{typeInfo.label}</span>
-                    </div>
-
-                    {report.description && (
-                      <p className="text-sm text-gray-700 mb-2 line-clamp-2">
-                        {report.description}
-                      </p>
-                    )}
-
-                    {report.address && (
-                      <p className="text-xs text-muted-foreground mb-3">
-                        📍 {report.address}
-                      </p>
-                    )}
-
-                    <div className="flex items-center justify-between">
-                      <button
-                        onClick={() => handleEmpathy(report.id)}
-                        className={`flex items-center gap-1 text-sm ${
-                          report.hasEmpathized
-                            ? 'text-red-500 font-medium'
-                            : 'text-gray-500 hover:text-red-500'
-                        }`}
-                      >
-                        {report.hasEmpathized ? '❤️' : '🤍'} 공감{' '}
-                        {report.empathy_count}
-                      </button>
-
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(report.created_at).toLocaleDateString('ko-KR')}
-                      </span>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
               );
             })}
