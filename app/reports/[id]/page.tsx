@@ -80,6 +80,11 @@ export default function ReportDetailPage() {
 
       if (error) throw error;
 
+      console.log('=== 제보 데이터 ===');
+      console.log('위도:', data.lat);
+      console.log('경도:', data.lng);
+      console.log('주소:', data.address);
+
       setReport(data);
       setEmpathyCount(data.empathy_count);
     } catch (error) {
