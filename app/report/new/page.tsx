@@ -13,7 +13,7 @@ export default function NewReportPage() {
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [location, setLocation] = useState<{ lat: number; lng: number; accuracy?: number } | null>(null);
   const [address, setAddress] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,8 +27,11 @@ export default function NewReportPage() {
           const newLocation = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
+            accuracy: position.coords.accuracy,
           };
-          console.log('위치 정보:', newLocation);
+          console.log('=== GPS 위치 정보 ===');
+          console.log('위도 (lat):', position.coords.latitude);
+          console.log('경도 (lng):', position.coords.longitude);
           console.log('정확도:', position.coords.accuracy, 'm');
           setLocation(newLocation);
         },
@@ -248,6 +251,9 @@ export default function NewReportPage() {
                     <p className="text-xs text-gray-600 mt-1">
                       위도: {location.lat.toFixed(6)}, 경도: {location.lng.toFixed(6)}
                     </p>
+                    <p className="text-xs text-orange-600 mt-1">
+                      ℹ️ GPS 정확도: {location.accuracy ? `약 ${Math.round(location.accuracy)}m` : '알 수 없음'}
+                    </p>
                   </div>
 
                   <div>
@@ -261,6 +267,9 @@ export default function NewReportPage() {
                       placeholder="예: 경기도 용인시 처인구..."
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
+                    <p className="text-xs text-gray-500 mt-1">
+                      💡 더 정확한 위치가 필요하면 주소를 직접 입력해주세요
+                    </p>
                   </div>
                 </div>
               ) : (
