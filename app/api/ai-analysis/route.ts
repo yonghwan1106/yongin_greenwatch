@@ -17,8 +17,59 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Claude에게 제보 분석 요청
-    const prompt = `당신은 환경 문제 전문가입니다. 다음 시민 제보를 분석해주세요:
+    // 이미지가 있으면 Vision API 사용, 없으면 텍스트만 분석
+    const hasImages = imageUrls && imageUrls.length > 0;
+
+    let content: any[];
+
+    if (hasImages) {
+      // 이미지 포함 분석
+      const imageContents = await Promise.all(
+        imageUrls.slice(0, 3).map(async (url: string) => {
+          // 이미지를 base64로 변환
+          const response = await fetch(url);
+          const buffer = await response.arrayBuffer();
+          const base64 = Buffer.from(buffer).toString('base64');
+          const mediaType = response.headers.get('content-type') || 'image/jpeg';
+
+          return {
+            type: 'image' as const,
+            source: {
+              type: 'base64' as const,
+              media_type: mediaType,
+              data: base64,
+            },
+          };
+        })
+      );
+
+      content = [
+        {
+          type: 'text' as const,
+          text: `당신은 환경 문제 전문가입니다. 다음 시민 제보를 분석해주세요:
+
+제보 유형: ${type}
+설명: ${description || '(설명 없음)'}
+
+첨부된 이미지를 분석하여 다음 항목을 JSON 형식으로 제공해주세요:
+1. keywords: 핵심 키워드 3-5개 (배열)
+2. detailed_type: 구체적인 문제 유형 (예: "불법 폐기물 투기", "악취 발생")
+3. severity: 심각도 (low, medium, high 중 하나)
+4. recommended_department: 담당 부서 추천 (예: "환경정책과", "청소행정과")
+5. summary: 한 줄 요약 (30자 이내)
+6. image_description: 이미지에서 관찰된 주요 내용 (100자 이내)
+7. confidence_score: 분석 신뢰도 (0.0 ~ 1.0)
+
+JSON만 응답해주세요.`,
+        },
+        ...imageContents,
+      ];
+    } else {
+      // 텍스트만 분석
+      content = [
+        {
+          type: 'text' as const,
+          text: `당신은 환경 문제 전문가입니다. 다음 시민 제보를 분석해주세요:
 
 제보 유형: ${type}
 설명: ${description || '(설명 없음)'}
@@ -31,7 +82,10 @@ export async function POST(request: NextRequest) {
 5. summary: 한 줄 요약 (30자 이내)
 6. confidence_score: 분석 신뢰도 (0.0 ~ 1.0)
 
-JSON만 응답해주세요.`;
+JSON만 응답해주세요.`,
+        },
+      ];
+    }
 
     const message = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
@@ -39,7 +93,7 @@ JSON만 응답해주세요.`;
       messages: [
         {
           role: 'user',
-          content: prompt,
+          content,
         },
       ],
     });

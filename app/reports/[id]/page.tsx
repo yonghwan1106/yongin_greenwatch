@@ -16,6 +16,7 @@ interface AIAnalysis {
   detailed_type: string;
   severity: string;
   recommended_department: string;
+  image_description: string | null;
   confidence_score: number;
   analyzed_at: string;
 }
@@ -71,6 +72,7 @@ export default function ReportDetailPage() {
             detailed_type,
             severity,
             recommended_department,
+            image_description,
             confidence_score,
             analyzed_at
           )
@@ -360,6 +362,18 @@ export default function ReportDetailPage() {
                         <span className="font-medium text-gray-800">
                           {analysis.recommended_department}
                         </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 이미지 분석 결과 */}
+                  {analysis.image_description && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">이미지 분석</p>
+                      <div className="bg-white p-4 rounded-lg border border-purple-200">
+                        <p className="text-sm text-gray-700 leading-relaxed">
+                          {analysis.image_description}
+                        </p>
                       </div>
                     </div>
                   )}
