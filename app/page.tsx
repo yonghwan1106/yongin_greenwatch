@@ -12,6 +12,9 @@ export default function Home() {
           <h1 className="text-6xl font-bold text-primary">
             용인 그린워치
           </h1>
+          <p className="text-xs text-gray-500">
+            용인특례시 정책 아이디어 출품작
+          </p>
           <p className="text-2xl text-muted-foreground">
             데이터로 숨 쉬는 용인, 시민의 손으로 만드는 투명한 환경도시
           </p>
