@@ -29,6 +29,9 @@ export function Header() {
 
           {/* 네비게이션 */}
           <nav className="hidden md:flex items-center gap-6">
+            <Link href="/about" className="text-gray-700 hover:text-primary transition">
+              소개
+            </Link>
             <Link href="/map" className="text-gray-700 hover:text-primary transition">
               환경 지도
             </Link>
@@ -79,25 +82,28 @@ export function Header() {
         </div>
 
         {/* 모바일 네비게이션 */}
-        <nav className="md:hidden flex items-center gap-4 mt-3 pt-3 border-t">
-          <Link href="/map" className="text-sm text-gray-700 hover:text-primary transition">
+        <nav className="md:hidden flex items-center gap-4 mt-3 pt-3 border-t overflow-x-auto">
+          <Link href="/about" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
+            소개
+          </Link>
+          <Link href="/map" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
             지도
           </Link>
-          <Link href="/reports" className="text-sm text-gray-700 hover:text-primary transition">
+          <Link href="/reports" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
             피드
           </Link>
-          <Link href="/anomaly" className="text-sm text-gray-700 hover:text-primary transition">
+          <Link href="/anomaly" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
             패턴
           </Link>
-          <Link href="/report/new" className="text-sm text-gray-700 hover:text-primary transition">
+          <Link href="/report/new" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
             제보
           </Link>
           {user && (
             <>
-              <Link href="/my-reports" className="text-sm text-gray-700 hover:text-primary transition">
+              <Link href="/my-reports" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
                 내 제보
               </Link>
-              <Link href="/profile" className="text-sm text-gray-700 hover:text-primary transition">
+              <Link href="/profile" className="text-sm text-gray-700 hover:text-primary transition whitespace-nowrap">
                 프로필
               </Link>
             </>
