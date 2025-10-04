@@ -6,7 +6,19 @@ import { Button } from '@/components/ui/button';
 import { Header } from '@/components/layout/Header';
 import { useAuth } from '@/lib/contexts/AuthContext';
 import { getReportTypeInfo, STATUS_COLORS, STATUS_TEXT } from '@/lib/types/report';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { supabase } from '@/lib/supabase/client';
+import { Sparkles, Building2, AlertTriangle } from 'lucide-react';
+
+interface AIAnalysis {
+  id: string;
+  report_id: string;
+  keywords: string[];
+  detailed_type: string;
+  severity: string;
+  recommended_department: string;
+  confidence_score: number;
+  analyzed_at: string;
+}
 
 interface ReportDetail {
   id: string;
@@ -23,6 +35,7 @@ interface ReportDetail {
     media_url: string;
     media_type: string;
   }>;
+  report_ai_analysis: AIAnalysis[];
 }
 
 export default function ReportDetailPage() {
@@ -52,6 +65,15 @@ export default function ReportDetailPage() {
           report_media (
             media_url,
             media_type
+          ),
+          report_ai_analysis (
+            id,
+            keywords,
+            detailed_type,
+            severity,
+            recommended_department,
+            confidence_score,
+            analyzed_at
           )
         `)
         .eq('id', params.id)
@@ -237,6 +259,114 @@ export default function ReportDetailPage() {
               </div>
             )}
           </div>
+
+          {/* AI 분석 결과 */}
+          {report.report_ai_analysis && report.report_ai_analysis.length > 0 && (
+            <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg shadow-md p-6 mb-6 border border-purple-200">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-5 h-5 text-purple-600" />
+                <h2 className="font-semibold text-purple-900">AI 분석 결과</h2>
+                <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
+                  Claude AI
+                </span>
+              </div>
+
+              {report.report_ai_analysis.map((analysis) => (
+                <div key={analysis.id} className="space-y-4">
+                  {/* 키워드 */}
+                  {analysis.keywords && analysis.keywords.length > 0 && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">핵심 키워드</p>
+                      <div className="flex flex-wrap gap-2">
+                        {analysis.keywords.map((keyword, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 bg-white text-purple-700 text-sm rounded-full border border-purple-200"
+                          >
+                            #{keyword}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 상세 유형 */}
+                  {analysis.detailed_type && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-1">문제 유형</p>
+                      <p className="text-lg font-medium text-gray-800">
+                        {analysis.detailed_type}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* 심각도 */}
+                  {analysis.severity && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">심각도</p>
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle
+                          className={`w-5 h-5 ${
+                            analysis.severity === 'high'
+                              ? 'text-red-600'
+                              : analysis.severity === 'medium'
+                              ? 'text-yellow-600'
+                              : 'text-green-600'
+                          }`}
+                        />
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            analysis.severity === 'high'
+                              ? 'bg-red-100 text-red-700'
+                              : analysis.severity === 'medium'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-green-100 text-green-700'
+                          }`}
+                        >
+                          {analysis.severity === 'high'
+                            ? '높음'
+                            : analysis.severity === 'medium'
+                            ? '보통'
+                            : '낮음'}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 추천 부서 */}
+                  {analysis.recommended_department && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">추천 담당 부서</p>
+                      <div className="flex items-center gap-2 bg-white p-3 rounded-lg border border-purple-200">
+                        <Building2 className="w-5 h-5 text-blue-600" />
+                        <span className="font-medium text-gray-800">
+                          {analysis.recommended_department}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 신뢰도 */}
+                  {analysis.confidence_score && (
+                    <div className="pt-2 border-t border-purple-200">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">분석 신뢰도</span>
+                        <span className="font-medium text-purple-700">
+                          {(analysis.confidence_score * 100).toFixed(0)}%
+                        </span>
+                      </div>
+                      <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-purple-600 h-2 rounded-full transition-all"
+                          style={{ width: `${analysis.confidence_score * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* 공감 섹션 */}
           <div className="bg-white rounded-lg shadow-md p-6">
