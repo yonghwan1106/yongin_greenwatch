@@ -35,6 +35,9 @@ export function Header() {
             <Link href="/reports" className="text-gray-700 hover:text-primary transition">
               제보 피드
             </Link>
+            <Link href="/anomaly" className="text-gray-700 hover:text-primary transition">
+              이상 패턴
+            </Link>
             <Link href="/report/new" className="text-gray-700 hover:text-primary transition">
               제보하기
             </Link>
@@ -82,6 +85,9 @@ export function Header() {
           </Link>
           <Link href="/reports" className="text-sm text-gray-700 hover:text-primary transition">
             피드
+          </Link>
+          <Link href="/anomaly" className="text-sm text-gray-700 hover:text-primary transition">
+            패턴
           </Link>
           <Link href="/report/new" className="text-sm text-gray-700 hover:text-primary transition">
             제보
