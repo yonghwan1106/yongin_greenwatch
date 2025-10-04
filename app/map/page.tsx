@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { YONGIN_STATIONS, AirQualityData } from '@/lib/types/air-quality';
 import { AirQualityMarker } from '@/components/map/AirQualityMarker';
 import { ReportMarker } from '@/components/map/ReportMarker';
@@ -14,6 +15,7 @@ declare global {
 
 export default function MapPage() {
   const mapRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
   const [map, setMap] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [airQualityData, setAirQualityData] = useState<Record<string, AirQualityData>>({});
@@ -43,14 +45,38 @@ export default function MapPage() {
   useEffect(() => {
     if (!isLoaded || !mapRef.current) return;
 
+    // URL 파라미터에서 위치 정보 가져오기
+    const lat = searchParams.get('lat');
+    const lng = searchParams.get('lng');
+    const reportId = searchParams.get('reportId');
+
+    const centerLat = lat ? parseFloat(lat) : 37.2411;
+    const centerLng = lng ? parseFloat(lng) : 127.1776;
+    const zoomLevel = (lat && lng) ? 5 : 8; // 특정 위치로 이동하면 더 확대
+
     const options = {
-      center: new window.kakao.maps.LatLng(37.2411, 127.1776), // 용인시청
-      level: 8,
+      center: new window.kakao.maps.LatLng(centerLat, centerLng),
+      level: zoomLevel,
     };
 
     const kakaoMap = new window.kakao.maps.Map(mapRef.current, options);
     setMap(kakaoMap);
-  }, [isLoaded]);
+
+    // 특정 제보 위치에 마커 추가
+    if (lat && lng && reportId) {
+      const markerPosition = new window.kakao.maps.LatLng(centerLat, centerLng);
+      const marker = new window.kakao.maps.Marker({
+        position: markerPosition,
+        map: kakaoMap,
+      });
+
+      // 인포윈도우 추가
+      const infowindow = new window.kakao.maps.InfoWindow({
+        content: '<div style="padding:10px;">📍 제보 위치</div>',
+      });
+      infowindow.open(kakaoMap, marker);
+    }
+  }, [isLoaded, searchParams]);
 
   // 대기질 데이터 로드
   useEffect(() => {

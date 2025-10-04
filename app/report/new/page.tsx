@@ -24,13 +24,26 @@ export default function NewReportPage() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation({
+          const newLocation = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-          });
+          };
+          console.log('위치 정보:', newLocation);
+          console.log('정확도:', position.coords.accuracy, 'm');
+          setLocation(newLocation);
         },
         (error) => {
           console.error('위치 정보를 가져올 수 없습니다:', error);
+          // 기본 위치 (용인시청)
+          setLocation({
+            lat: 37.2411,
+            lng: 127.1776,
+          });
+        },
+        {
+          enableHighAccuracy: true, // 고정밀도 위치 사용
+          timeout: 10000,
+          maximumAge: 0
         }
       );
     }
