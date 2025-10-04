@@ -179,6 +179,20 @@ export async function POST(request: NextRequest) {
     console.log('Saved report ID:', report.id);
     console.log('Saved user_id:', report.user_id || '(익명)');
 
+    // AI 분석 호출 (비동기, 결과를 기다리지 않음)
+    if (process.env.ANTHROPIC_API_KEY) {
+      fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/ai-analysis`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          reportId: report.id,
+          description,
+          type,
+          imageUrls: uploadedMedia.map(m => m.media_url),
+        }),
+      }).catch(error => console.error('AI analysis failed:', error));
+    }
+
     return NextResponse.json({
       success: true,
       data: {
