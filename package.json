@@ -1,0 +1,40 @@
+{
+  "name": "yongin-greenwatch",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/supabase-js": "^2.45.7",
+    "@tanstack/react-query": "^5.62.7",
+    "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "nanoid": "^5.0.9",
+    "next": "14.2.21",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0",
+    "tailwind-merge": "^2.5.5",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.21",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.6.3"
+  }
+}
