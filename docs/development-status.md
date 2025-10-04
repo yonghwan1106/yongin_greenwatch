@@ -85,6 +85,26 @@
 - [x] API 설정 가이드 (`docs/setup-guide.md`)
 - [x] 개발 현황 문서 (이 파일)
 
+### 9. 버그 수정 및 개선사항 (2025년 10월 4일)
+- [x] **제보 등록 인증 버그 수정**
+  - Authorization Bearer token 방식으로 변경
+  - Session NULL 문제 해결
+- [x] **포인트 시스템 수정**
+  - Service Role Key를 통한 RLS 우회
+  - 포인트 지급 API 라우트 생성 (`/api/empathy`)
+  - `.single()` → `.maybeSingle()` 변경으로 406 에러 해결
+- [x] **GPS 좌표 정밀도 개선**
+  - DECIMAL(10,7) → DOUBLE PRECISION 마이그레이션
+  - enableHighAccuracy 옵션 추가
+  - GPS 정확도 표시 추가
+- [x] **제보 피드 → 상세 페이지 네비게이션 추가**
+  - 카드 클릭 시 상세 페이지 이동
+  - 공감 버튼 이벤트 버블링 방지
+- [x] **지도 위치 확인 기능 추가**
+  - URL 파라미터로 제보 위치 전달
+  - 지도 중심 및 줌 레벨 조정
+  - 제보 위치 마커 및 인포윈도우 표시
+
 ---
 
 ## 🚧 진행 중인 작업
@@ -145,13 +165,27 @@
 
 ---
 
-## 🎯 Phase 2 계획 (V1.0 - AI 및 알림)
+## 🎯 Phase 2: AI 분석 및 알림 (진행 중)
 
-### AI 분석 (Epic 3)
-- [ ] Claude API 통합
-- [ ] 제보 자동 태깅 및 분류
+### ✅ AI 분석 (Epic 3) - 기본 구현 완료
+- [x] Claude API 통합 (Anthropic SDK)
+- [x] 제보 자동 분석 API (`/api/ai-analysis`)
+  - [x] 핵심 키워드 추출
+  - [x] 상세 문제 유형 분류
+  - [x] 심각도 판정 (low/medium/high)
+  - [x] 담당 부서 추천
+  - [x] 분석 신뢰도 점수
+- [x] 제보 상세 페이지에 AI 분석 결과 표시
+  - [x] 키워드 태그
+  - [x] 심각도 배지 (색상 구분)
+  - [x] 추천 담당 부서
+  - [x] 신뢰도 프로그레스바
+
+### 🚧 AI 분석 고도화 (예정)
+- [ ] 이미지 분석 (Claude Vision API)
 - [ ] 이상 패턴 감지
 - [ ] 월간 리포트 자동 생성
+- [ ] 유사 제보 추천
 
 ### 알림 시스템 (Epic 5)
 - [ ] Firebase Cloud Messaging 설정
@@ -227,15 +261,20 @@ yongin-greenwatch/
 
 ## 🐛 알려진 이슈
 
-1. **에어코리아 API 응답 없음**
-   - 원인: API 키 미설정 또는 측정소명 불일치
-   - 해결: `.env.local`에 API 키 확인, 측정소명 확인 필요
-   - 상태: 환경변수 설정 필요
+### ✅ 해결된 이슈
+1. ~~**제보 등록 시 user_id NULL 저장**~~ → 해결 (Authorization header 사용)
+2. ~~**포인트 지급 403 Forbidden**~~ → 해결 (Service Role Key 사용)
+3. ~~**GPS 좌표 정밀도 낮음**~~ → 해결 (DOUBLE PRECISION 마이그레이션)
+4. ~~**제보 상세 페이지 접근 불가**~~ → 해결 (네비게이션 링크 추가)
 
-2. **Supabase 마이그레이션 미실행**
-   - 데이터베이스 스키마가 생성되지 않음
-   - 해결: `supabase/migrations/001_initial_schema.sql` 파일을 Supabase 대시보드에서 실행 필요
-   - 상태: 수동 실행 대기
+### 📝 현재 이슈
+1. **에어코리아 API 응답 간헐적 실패**
+   - 원인: Internal Server Error (500)
+   - 상태: API 서버 문제로 추정, 재시도 로직 필요
+
+2. **Next.js 개발 모드 경고**
+   - "Skipping auto-scroll behavior due to position: fixed"
+   - 상태: 기능상 문제 없음, 개발 모드 전용 경고
 
 ---
 
