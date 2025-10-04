@@ -109,7 +109,7 @@ export default function ReportsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         {/* 서브 헤더 */}
         <div className="bg-white shadow-sm sticky top-[72px] z-10">
           <div className="container mx-auto px-4 py-4">
