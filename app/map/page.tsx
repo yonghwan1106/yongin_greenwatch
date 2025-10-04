@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { YONGIN_STATIONS, AirQualityData } from '@/lib/types/air-quality';
 import { AirQualityMarker } from '@/components/map/AirQualityMarker';
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export default function MapPage() {
+function MapContent() {
   const mapRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const [map, setMap] = useState<any>(null);
@@ -232,5 +232,20 @@ export default function MapPage() {
       </div>
       </div>
     </>
+  );
+}
+
+export default function MapPage() {
+  return (
+    <Suspense fallback={
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
+        </div>
+      </>
+    }>
+      <MapContent />
+    </Suspense>
   );
 }
