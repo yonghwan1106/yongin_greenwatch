@@ -99,11 +99,17 @@ export default function ReportDetailPage() {
         .select('id')
         .eq('report_id', params.id)
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
+
+      if (error) {
+        console.error('Error checking empathy:', error);
+        setHasEmpathized(false);
+        return;
+      }
 
       setHasEmpathized(!!data);
     } catch (error) {
-      // 공감하지 않은 경우 에러 발생 (정상)
+      console.error('Error checking empathy:', error);
       setHasEmpathized(false);
     }
   };
@@ -143,13 +149,21 @@ export default function ReportDetailPage() {
         setEmpathyCount(prev => prev + 1);
 
         // 공감 포인트 지급 (하루 최대 5회)
-        await supabase.rpc('add_user_points', {
-          p_user_id: user.id,
-          p_type: 'empathy_given',
-          p_amount: 5,
-          p_reference_id: params.id,
-          p_description: '제보 공감 참여',
+        const pointsResponse = await fetch('/api/empathy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: user.id,
+            reportId: params.id,
+            action: 'add',
+          }),
         });
+
+        const pointsResult = await pointsResponse.json();
+        if (pointsResult.limitExceeded) {
+          // 한도 초과는 알림만 (공감은 유지)
+          console.log(pointsResult.message);
+        }
       }
     } catch (error: any) {
       console.error('Error toggling empathy:', error);
