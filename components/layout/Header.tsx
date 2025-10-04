@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/contexts/AuthContext';
+import { Map, FileText, PlusCircle, User, LogIn, LogOut, Leaf, Menu } from 'lucide-react';
+import { useState } from 'react';
 
 export function Header() {
   const router = useRouter();
   const { user, signOut } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -19,84 +22,136 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          {/* 로고 */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-primary">용인 그린워치</span>
+    <header className="bg-white/95 backdrop-blur-lg shadow-sm sticky top-0 z-50 border-b border-gray-100">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+              <Leaf className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent hidden sm:inline">
+              용인 그린워치
+            </span>
           </Link>
 
-          {/* 네비게이션 */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/map" className="text-gray-700 hover:text-primary transition">
-              환경 지도
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            <Link
+              href="/map"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-gray-600 hover:bg-emerald-50 hover:text-emerald-700"
+            >
+              <Map className="w-4 h-4" />
+              <span>환경 지도</span>
             </Link>
-            <Link href="/reports" className="text-gray-700 hover:text-primary transition">
-              제보 피드
+            <Link
+              href="/reports"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-gray-600 hover:bg-emerald-50 hover:text-emerald-700"
+            >
+              <FileText className="w-4 h-4" />
+              <span>제보 피드</span>
             </Link>
-            <Link href="/report/new" className="text-gray-700 hover:text-primary transition">
-              제보하기
+            <Link
+              href="/report/new"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-gray-600 hover:bg-emerald-50 hover:text-emerald-700"
+            >
+              <PlusCircle className="w-4 h-4" />
+              <span>제보하기</span>
             </Link>
-            {user && (
-              <Link href="/my-reports" className="text-gray-700 hover:text-primary transition">
-                내 제보
-              </Link>
-            )}
           </nav>
 
-          {/* 사용자 메뉴 */}
+          {/* User Menu */}
           <div className="flex items-center gap-3">
             {user ? (
               <>
-                <Link href="/profile">
-                  <Button variant="ghost" size="sm" className="hidden sm:flex">
-                    👤 프로필
+                <Link href="/profile" className="hidden sm:block">
+                  <Button variant="ghost" size="sm" className="gap-2 hover:bg-emerald-50">
+                    <User className="w-4 h-4" />
+                    <span>프로필</span>
                   </Button>
                 </Link>
-                <Button onClick={handleSignOut} variant="outline" size="sm">
-                  로그아웃
+                <Button onClick={handleSignOut} variant="outline" size="sm" className="gap-2 border-gray-200">
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">로그아웃</span>
                 </Button>
               </>
             ) : (
               <>
-                <Link href="/auth/login">
-                  <Button variant="outline" size="sm">
-                    로그인
+                <Link href="/auth/login" className="hidden sm:block">
+                  <Button variant="outline" size="sm" className="gap-2 border-emerald-200 hover:bg-emerald-50">
+                    <LogIn className="w-4 h-4" />
+                    <span>로그인</span>
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button size="sm">
-                    회원가입
+                  <Button size="sm" className="gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700">
+                    <span>회원가입</span>
                   </Button>
                 </Link>
               </>
             )}
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
           </div>
         </div>
 
-        {/* 모바일 네비게이션 */}
-        <nav className="md:hidden flex items-center gap-4 mt-3 pt-3 border-t">
-          <Link href="/map" className="text-sm text-gray-700 hover:text-primary transition">
-            지도
-          </Link>
-          <Link href="/reports" className="text-sm text-gray-700 hover:text-primary transition">
-            피드
-          </Link>
-          <Link href="/report/new" className="text-sm text-gray-700 hover:text-primary transition">
-            제보
-          </Link>
-          {user && (
-            <>
-              <Link href="/my-reports" className="text-sm text-gray-700 hover:text-primary transition">
-                내 제보
-              </Link>
-              <Link href="/profile" className="text-sm text-gray-700 hover:text-primary transition">
-                프로필
-              </Link>
-            </>
-          )}
-        </nav>
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-100 space-y-2">
+            <Link
+              href="/map"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Map className="w-4 h-4" />
+              <span>환경 지도</span>
+            </Link>
+            <Link
+              href="/reports"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <FileText className="w-4 h-4" />
+              <span>제보 피드</span>
+            </Link>
+            <Link
+              href="/report/new"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <PlusCircle className="w-4 h-4" />
+              <span>제보하기</span>
+            </Link>
+            {user && (
+              <>
+                <Link
+                  href="/my-reports"
+                  className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>내 제보</span>
+                </Link>
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="w-4 h-4" />
+                  <span>프로필</span>
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );
