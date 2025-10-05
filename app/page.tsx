@@ -12,7 +12,7 @@ export default function Home() {
           <h1 className="text-6xl font-bold text-primary">
             용인 그린워치
           </h1>
-          <p className="text-xs text-gray-500">
+          <p className="text-sm font-medium text-gray-700 inline-block px-4 py-2 border-2 border-green-500 rounded-lg bg-green-50">
             용인특례시 정책 아이디어 출품작
           </p>
           <p className="text-2xl text-muted-foreground">
