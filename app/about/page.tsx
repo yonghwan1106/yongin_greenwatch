@@ -308,53 +308,235 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
               🚀 개발 로드맵
             </h2>
-            <div className="space-y-6">
-              {/* Phase 1 */}
-              <div className="border-l-4 border-green-500 pl-6 py-4 bg-green-50 rounded-r-lg">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded-full">
-                    완료
-                  </span>
-                  <h3 className="text-xl font-bold text-gray-900">Phase 1: MVP (0~6개월)</h3>
-                </div>
-                <ul className="text-gray-700 space-y-1">
-                  <li>✅ 실시간 환경 지도</li>
-                  <li>✅ 시민 제보 시스템</li>
-                  <li>✅ 사용자 인증 및 포인트 시스템</li>
-                  <li>✅ 제보 피드 및 공감 기능</li>
-                </ul>
-              </div>
 
-              {/* Phase 2 */}
-              <div className="border-l-4 border-blue-500 pl-6 py-4 bg-blue-50 rounded-r-lg">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">
-                    완료
-                  </span>
-                  <h3 className="text-xl font-bold text-gray-900">Phase 2: AI 분석 (6~9개월)</h3>
+            {/* 현재 구현된 기능 */}
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <span className="text-green-600">✓</span> 현재 구현된 기능
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-5">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3">핵심 플랫폼</h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>실시간 환경 지도 (에어코리아 API 연동)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>사진 및 위치 기반 시민 제보 시스템</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>제보 피드 및 실시간 공유</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>사용자 인증 및 프로필 관리</span>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="text-gray-700 space-y-1">
-                  <li>✅ Claude AI 제보 자동 분석</li>
-                  <li>✅ Vision API 이미지 분석</li>
-                  <li>✅ 이상 패턴 감지 시스템</li>
-                  <li>⏳ 알림 시스템 (진행 예정)</li>
-                </ul>
-              </div>
 
-              {/* Phase 3 */}
-              <div className="border-l-4 border-purple-500 pl-6 py-4 bg-purple-50 rounded-r-lg">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full">
-                    예정
-                  </span>
-                  <h3 className="text-xl font-bold text-gray-900">Phase 3: 생태계 확장 (9~12개월)</h3>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-5">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3">AI 분석 시스템</h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>Claude 3.5 Sonnet AI 제보 자동 분석</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>Vision API를 통한 이미지 인식 및 분류</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>환경 문제 유형 및 심각도 자동 판정</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>이상 패턴 감지 및 핫스팟 식별</span>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="text-gray-700 space-y-1">
-                  <li>⏳ 녹색 보상 마켓플레이스</li>
-                  <li>⏳ 파트너 상점 연동</li>
-                  <li>⏳ 친환경 챌린지</li>
-                  <li>⏳ 관리자 대시보드</li>
-                </ul>
+
+                <div className="bg-green-50 border border-green-200 rounded-lg p-5">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3">커뮤니티 기능</h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>제보 공감하기 시스템</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>포인트 적립 시스템</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>내 제보 관리 페이지</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>사용자 프로필 및 활동 내역</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-50 border border-green-200 rounded-lg p-5">
+                  <h4 className="font-bold text-lg text-gray-900 mb-3">데이터 시각화</h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>카카오 맵 기반 대화형 지도</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>대기질 실시간 측정값 표시</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>제보 위치 마커 및 클러스터링</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-0.5">✓</span>
+                      <span>이상 패턴 시각화 페이지</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* 앞으로 구현할 기능 */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <span className="text-blue-600">⏳</span> 앞으로 구현할 기능
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                      우선순위: 높음
+                    </span>
+                    <h4 className="font-bold text-lg text-gray-900">알림 및 소통 강화</h4>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 ml-4">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>실시간 알림 시스템 (제보 반응, 패턴 감지, 처리 상태 변경)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>제보 댓글 및 토론 기능</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>이메일/푸시 알림 설정</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                      우선순위: 높음
+                    </span>
+                    <h4 className="font-bold text-lg text-gray-900">행정 연동 시스템</h4>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 ml-4">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>관리자 대시보드 (제보 모니터링, 통계, 우선순위 관리)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>제보 처리 상태 업데이트 (접수/진행중/완료)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>용인시청 환경부서 연동 API</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-purple-600 text-white text-sm font-medium rounded-full">
+                      우선순위: 중간
+                    </span>
+                    <h4 className="font-bold text-lg text-gray-900">녹색 보상 생태계</h4>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 ml-4">
+                    <li className="flex items-start gap-2">
+                      <span className="text-purple-600 mt-0.5">•</span>
+                      <span>포인트 마켓플레이스 (상품 교환, 할인 쿠폰)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-purple-600 mt-0.5">•</span>
+                      <span>지역 친환경 상점 파트너십 연동</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-purple-600 mt-0.5">•</span>
+                      <span>친환경 챌린지 및 캠페인 시스템</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-purple-600 mt-0.5">•</span>
+                      <span>월간/연간 환경지킴이 리더보드</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
+                      우선순위: 중간
+                    </span>
+                    <h4 className="font-bold text-lg text-gray-900">AI 고도화</h4>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 ml-4">
+                    <li className="flex items-start gap-2">
+                      <span className="text-indigo-600 mt-0.5">•</span>
+                      <span>과거 제보 데이터 기반 예측 모델</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-indigo-600 mt-0.5">•</span>
+                      <span>계절별/시간대별 환경 리스크 예측</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-indigo-600 mt-0.5">•</span>
+                      <span>다중 제보 통합 분석 (동일 사건 자동 연결)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-indigo-600 mt-0.5">•</span>
+                      <span>AI 챗봇을 통한 제보 가이드</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-amber-600 text-white text-sm font-medium rounded-full">
+                      우선순위: 낮음
+                    </span>
+                    <h4 className="font-bold text-lg text-gray-900">확장 기능</h4>
+                  </div>
+                  <ul className="space-y-2 text-gray-700 ml-4">
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600 mt-0.5">•</span>
+                      <span>모바일 앱 개발 (iOS/Android)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600 mt-0.5">•</span>
+                      <span>다른 지역으로 플랫폼 확장</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600 mt-0.5">•</span>
+                      <span>오픈 API 제공 (연구자, 개발자용)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600 mt-0.5">•</span>
+                      <span>환경 데이터 시각화 대시보드 고도화</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
