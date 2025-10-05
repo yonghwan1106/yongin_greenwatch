@@ -57,7 +57,7 @@ export function Header() {
               <>
                 <Link href="/profile">
                   <Button variant="ghost" size="sm" className="hidden sm:flex">
-                    👤 프로필
+                    👤 {user.email?.split('@')[0] || '프로필'}
                   </Button>
                 </Link>
                 <Button onClick={handleSignOut} variant="outline" size="sm">
