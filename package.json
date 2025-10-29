@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup-demo": "tsx scripts/setup-demo.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
@@ -31,11 +32,13 @@
     "@types/qrcode": "^1.5.5",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.21",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.7.1",
     "typescript": "^5.6.3"
   }
 }
