@@ -165,7 +165,7 @@ export default function Home() {
               <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-orange-300 overflow-hidden flex flex-col">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&q=80"
+                    src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
                     alt="녹색 포인트"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
