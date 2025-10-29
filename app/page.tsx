@@ -312,13 +312,16 @@ export default function Home() {
             <div>
               <h3 className="text-white font-semibold text-lg mb-4">문의하기</h3>
               <p className="text-sm">
-                서비스 이용 중 문의사항이 있으시면<br />
-                언제든지 연락주세요
+                박용환 대표<br />
+                010-7939-3123
               </p>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center text-gray-400">
-            <p>&copy; 2025 용인 그린워치. Made with 💚 for Yongin City</p>
+            <p>&copy; 2025 용인 그린워치. Made with 💚 for Yongin Citizen</p>
+            <p className="mt-2">
+              Made by <a href="https://yongin-civic-data-hub.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline">용인시민 데이터 허브</a>
+            </p>
           </div>
         </div>
       </footer>
