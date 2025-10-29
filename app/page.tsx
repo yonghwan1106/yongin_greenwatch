@@ -251,7 +251,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/auth/login">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-semibold text-lg px-10 py-6">
+              <Button size="lg" variant="outline" className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 font-semibold text-lg px-10 py-6">
                 로그인
               </Button>
             </Link>
