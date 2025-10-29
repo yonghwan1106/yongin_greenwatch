@@ -102,8 +102,20 @@ JSON만 응답해주세요.`,
       ? message.content[0].text
       : '';
 
+    // Extract JSON from response (handle cases where Claude adds extra text)
+    let jsonText = responseText.trim();
+
+    // Try to find JSON block in the response
+    const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      jsonText = jsonMatch[0];
+    }
+
+    // Remove markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+
     // JSON 파싱
-    const analysisResult = JSON.parse(responseText);
+    const analysisResult = JSON.parse(jsonText);
 
     // Supabase에 분석 결과 저장
     const supabase = createClient(

@@ -87,7 +87,19 @@ JSON만 응답해주세요.`;
       ? message.content[0].text
       : '';
 
-    const analysisResult = JSON.parse(responseText);
+    // Extract JSON from response (handle cases where Claude adds extra text)
+    let jsonText = responseText.trim();
+
+    // Try to find JSON block in the response
+    const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      jsonText = jsonMatch[0];
+    }
+
+    // Remove markdown code blocks if present
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+
+    const analysisResult = JSON.parse(jsonText);
 
     return NextResponse.json({
       success: true,
