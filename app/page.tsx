@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/layout/Header';
 import {
@@ -21,8 +22,17 @@ export default function Home() {
       <Header />
 
       {/* Hero Section with Background */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=1600&q=80"
+            alt="용인 자연 배경"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-blue-700/80 to-green-600/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center space-y-6">
             <div className="inline-block">
@@ -44,7 +54,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/reports">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-semibold text-lg px-8 py-6">
+                <Button size="lg" variant="outline" className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 font-semibold text-lg px-8 py-6">
                   <MessageSquare className="w-5 h-5 mr-2" />
                   제보하기
                 </Button>
