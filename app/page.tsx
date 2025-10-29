@@ -123,7 +123,7 @@ export default function Home() {
               <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-green-300 overflow-hidden flex flex-col">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?w=800&q=80"
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
                     alt="시민 제보"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
