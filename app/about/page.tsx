@@ -21,37 +21,28 @@ export default function AboutPage() {
   return (
     <>
       <Header />
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-green-600 to-emerald-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&q=80"
+            alt="환경 보호"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-green-600/90 to-emerald-600/90"></div>
+        <div className="relative container mx-auto px-4 py-16 max-w-6xl">
+          <h1 className="text-4xl font-bold mb-3">서비스 소개</h1>
+          <p className="text-lg text-white/90">
+            용인 그린워치 - AI 기반 시민 참여형 환경 거버넌스 플랫폼
+          </p>
+        </div>
+      </section>
+
       <div className="min-h-screen bg-gray-50">
-        {/* 히어로 섹션 */}
-        <section className="relative bg-gradient-to-br from-blue-600 via-green-600 to-emerald-600 text-white overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&q=80"
-              alt="환경 보호"
-              fill
-              className="object-cover opacity-20"
-              priority
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-green-600/90 to-emerald-600/90"></div>
-          <div className="relative container mx-auto px-4 max-w-4xl text-center py-24">
-            <div className="inline-block mb-6">
-              <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
-                용인특례시 환경 거버넌스 플랫폼
-              </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              용인 그린워치
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-50 mb-8">
-              AI 기반 시민 참여형 환경 거버넌스 플랫폼
-            </p>
-            <p className="text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
-              시민의 제보와 인공지능 분석이 만나 용인시의 환경을 보호하고,
-              더 나은 도시 환경을 만들어갑니다.
-            </p>
-          </div>
-        </section>
 
         {/* 프로젝트 배경 */}
         <section className="py-16 bg-white">
