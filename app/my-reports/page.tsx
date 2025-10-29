@@ -111,7 +111,7 @@ export default function MyReportsPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-orange-600/90 via-amber-600/90 to-yellow-600/90"></div>
-        <div className="relative container mx-auto px-4 py-12 max-w-6xl">
+        <div className="relative container mx-auto px-4 py-16 max-w-6xl">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold mb-3">내 제보</h1>

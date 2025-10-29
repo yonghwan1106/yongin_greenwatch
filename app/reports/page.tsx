@@ -123,7 +123,7 @@ export default function ReportsPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-green-600/90 via-emerald-600/90 to-teal-600/90"></div>
-        <div className="relative container mx-auto px-4 py-12">
+        <div className="relative container mx-auto px-4 py-16">
           <h1 className="text-4xl font-bold mb-3">제보 피드</h1>
           <p className="text-lg text-white/90">
             시민들의 환경 제보를 확인하고 공감하세요

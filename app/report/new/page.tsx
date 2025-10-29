@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/layout/Header';
@@ -134,10 +135,31 @@ export default function NewReportPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 pt-20">
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-red-600 via-rose-600 to-pink-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1600&q=80"
+            alt="환경 제보"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-red-600/90 via-rose-600/90 to-pink-600/90"></div>
+        <div className="relative container mx-auto px-4 py-16 max-w-4xl">
+          <h1 className="text-4xl font-bold mb-3">환경 제보하기</h1>
+          <p className="text-lg text-white/90">
+            발견한 환경 문제를 제보하여 더 나은 용인을 만들어가요
+          </p>
+        </div>
+      </section>
+
+      <div className="min-h-screen bg-gray-50">
 
       {/* 진행 단계 표시 */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-4">
             {[1, 2, 3].map((s) => (
