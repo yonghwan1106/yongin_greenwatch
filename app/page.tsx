@@ -99,22 +99,21 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Service Card 1 */}
             <Link href="/map" className="group">
-              <div className="relative rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-blue-300 overflow-hidden">
-                <div className="absolute inset-0">
+              <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-blue-300 overflow-hidden flex flex-col">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&q=80"
                     alt="환경지도"
                     fill
-                    className="object-cover opacity-20"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/95 to-white/95"></div>
-                <div className="relative p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
                     <MapPin className="w-7 h-7 text-blue-600" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-900">실시간 환경지도</h3>
-                  <p className="text-sm text-gray-600 mb-4">용인시 전역의 대기질 데이터를 실시간으로 확인하세요</p>
+                  <p className="text-sm text-gray-600 mb-4 flex-1">용인시 전역의 대기질 데이터를 실시간으로 확인하세요</p>
                   <div className="flex items-center text-blue-600 text-sm font-medium">
                     바로가기 <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -124,22 +123,21 @@ export default function Home() {
 
             {/* Service Card 2 */}
             <Link href="/reports" className="group">
-              <div className="relative rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-green-300 overflow-hidden">
-                <div className="absolute inset-0">
+              <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-green-300 overflow-hidden flex flex-col">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1573167710701-35950a41e251?w=800&q=80"
                     alt="시민 제보"
                     fill
-                    className="object-cover opacity-20"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50/95 to-white/95"></div>
-                <div className="relative p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition">
                     <MessageSquare className="w-7 h-7 text-green-600" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-900">시민 환경 제보</h3>
-                  <p className="text-sm text-gray-600 mb-4">환경 문제를 발견하면 사진과 함께 즉시 제보하세요</p>
+                  <p className="text-sm text-gray-600 mb-4 flex-1">환경 문제를 발견하면 사진과 함께 즉시 제보하세요</p>
                   <div className="flex items-center text-green-600 text-sm font-medium">
                     바로가기 <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -149,22 +147,21 @@ export default function Home() {
 
             {/* Service Card 3 */}
             <Link href="/anomaly" className="group">
-              <div className="relative rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-purple-300 overflow-hidden">
-                <div className="absolute inset-0">
+              <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-purple-300 overflow-hidden flex flex-col">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
                     alt="이상 패턴 감지"
                     fill
-                    className="object-cover opacity-20"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/95 to-white/95"></div>
-                <div className="relative p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <div className="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-200 transition">
                     <TrendingUp className="w-7 h-7 text-purple-600" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-900">이상 패턴 감지</h3>
-                  <p className="text-sm text-gray-600 mb-4">AI가 환경 데이터의 이상 패턴을 자동으로 분석합니다</p>
+                  <p className="text-sm text-gray-600 mb-4 flex-1">AI가 환경 데이터의 이상 패턴을 자동으로 분석합니다</p>
                   <div className="flex items-center text-purple-600 text-sm font-medium">
                     바로가기 <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -174,22 +171,21 @@ export default function Home() {
 
             {/* Service Card 4 */}
             <Link href="/profile" className="group">
-              <div className="relative rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-orange-300 overflow-hidden">
-                <div className="absolute inset-0">
+              <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all h-full border border-gray-100 hover:border-orange-300 overflow-hidden flex flex-col">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&q=80"
                     alt="녹색 포인트"
                     fill
-                    className="object-cover opacity-20"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/95 to-white/95"></div>
-                <div className="relative p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <div className="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition">
                     <Award className="w-7 h-7 text-orange-600" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-900">녹색 포인트</h3>
-                  <p className="text-sm text-gray-600 mb-4">환경 보호 활동으로 포인트를 모아 혜택을 받으세요</p>
+                  <p className="text-sm text-gray-600 mb-4 flex-1">환경 보호 활동으로 포인트를 모아 혜택을 받으세요</p>
                   <div className="flex items-center text-orange-600 text-sm font-medium">
                     바로가기 <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
