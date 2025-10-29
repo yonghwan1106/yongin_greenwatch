@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase/client';
@@ -109,20 +110,31 @@ export default function ReportsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 pt-20">
-        {/* 서브 헤더 */}
-        <div className="bg-white shadow-sm sticky top-[72px] z-10">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h1 className="text-xl font-bold text-primary">제보 피드</h1>
-                <p className="text-sm text-muted-foreground">
-                  시민들의 환경 제보를 확인하세요
-                </p>
-              </div>
-            </div>
 
-            {/* 정렬 옵션 */}
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1573167710701-35950a41e251?w=1600&q=80"
+            alt="커뮤니티"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-green-600/90 via-emerald-600/90 to-teal-600/90"></div>
+        <div className="relative container mx-auto px-4 py-12">
+          <h1 className="text-4xl font-bold mb-3">제보 피드</h1>
+          <p className="text-lg text-white/90">
+            시민들의 환경 제보를 확인하고 공감하세요
+          </p>
+        </div>
+      </section>
+
+      <div className="min-h-screen bg-gray-50">
+        {/* 정렬 옵션 */}
+        <div className="bg-white border-b sticky top-0 z-10">
+          <div className="container mx-auto px-4 py-4">
             <div className="flex gap-2">
               <Button
                 variant={sortBy === 'latest' ? 'default' : 'outline'}

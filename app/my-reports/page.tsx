@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
@@ -97,27 +98,41 @@ export default function MyReportsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container mx-auto px-4 py-8 max-w-6xl">
-          {/* 헤더 */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold mb-2">내 제보</h1>
-                <p className="text-gray-600">내가 작성한 환경 제보 내역입니다</p>
-              </div>
-              <Button
-                onClick={() => {
-                  setLoading(true);
-                  fetchMyReports();
-                }}
-                variant="outline"
-                disabled={loading}
-              >
-                {loading ? '새로고침 중...' : '🔄 새로고침'}
-              </Button>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-orange-600 via-amber-600 to-yellow-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1586339277861-b0b895343ba5?w=1600&q=80"
+            alt="내 제보"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-600/90 via-amber-600/90 to-yellow-600/90"></div>
+        <div className="relative container mx-auto px-4 py-12 max-w-6xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold mb-3">내 제보</h1>
+              <p className="text-lg text-white/90">내가 작성한 환경 제보를 관리하세요</p>
             </div>
+            <Button
+              onClick={() => {
+                setLoading(true);
+                fetchMyReports();
+              }}
+              disabled={loading}
+              className="bg-white text-orange-600 hover:bg-orange-50"
+            >
+              {loading ? '새로고침 중...' : '🔄 새로고침'}
+            </Button>
           </div>
+        </div>
+      </section>
+
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-8 max-w-6xl">
 
           {/* 통계 카드 */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

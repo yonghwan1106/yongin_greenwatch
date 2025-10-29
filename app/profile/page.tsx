@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
@@ -118,19 +119,40 @@ export default function ProfilePage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 pt-20">
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=1600&q=80"
+            alt="프로필"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90"></div>
+        <div className="relative container mx-auto px-4 py-12 max-w-4xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold mb-3">내 프로필</h1>
+              <p className="text-lg text-white/90">{user?.email}</p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={handleSignOut}
+              className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-purple-600"
+            >
+              로그아웃
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           {/* 사용자 정보 */}
           <div className="bg-white rounded-lg shadow-md p-8 mb-6">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h1 className="text-2xl font-bold mb-2">내 프로필</h1>
-                <p className="text-gray-600">{user?.email}</p>
-              </div>
-              <Button variant="outline" onClick={handleSignOut}>
-                로그아웃
-              </Button>
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-gradient-to-br from-primary to-green-600 text-white rounded-lg p-6">

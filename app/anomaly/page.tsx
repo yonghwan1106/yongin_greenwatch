@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, TrendingUp, MapPin, RefreshCw } from 'lucide-react';
@@ -91,23 +92,41 @@ export default function AnomalyDetectionPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container mx-auto px-4 py-8 max-w-6xl">
-          {/* 헤더 */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">이상 패턴 감지</h1>
-                <p className="text-gray-600 mt-2">
-                  AI가 최근 제보 데이터에서 이상 패턴을 분석합니다
-                </p>
-              </div>
-              <Button onClick={fetchAnomalies} disabled={isLoading}>
-                <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-                새로고침
-              </Button>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80"
+            alt="데이터 분석"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 via-pink-600/90 to-red-600/90"></div>
+        <div className="relative container mx-auto px-4 py-16 max-w-6xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold mb-3">이상 패턴 감지</h1>
+              <p className="text-lg text-white/90">
+                AI가 최근 제보 데이터에서 이상 패턴을 분석합니다
+              </p>
             </div>
+            <Button
+              onClick={fetchAnomalies}
+              disabled={isLoading}
+              className="bg-white text-purple-600 hover:bg-purple-50"
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+              새로고침
+            </Button>
           </div>
+        </div>
+      </section>
+
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-8 max-w-6xl">
 
           {/* 로딩 */}
           {isLoading && (
