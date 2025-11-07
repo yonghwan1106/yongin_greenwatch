@@ -46,28 +46,30 @@ export async function GET(request: NextRequest) {
     }
 
     // Claude에게 패턴 분석 요청
-    const analysisPrompt = `당신은 환경 데이터 분석 전문가입니다. 다음은 최근 7일간의 환경 제보 데이터입니다:
+    const analysisPrompt = `당신은 경기도 용인시의 환경 데이터 분석 전문가입니다. 다음은 용인시에서 최근 7일간 접수된 환경 제보 데이터입니다:
 
 ${JSON.stringify(recentReports, null, 2)}
 
 다음 이상 패턴을 감지해주세요:
-1. 특정 지역에 제보가 집중된 경우 (같은 주소 또는 0.01도 이내 좌표)
+1. 용인시 내 특정 지역에 제보가 집중된 경우 (같은 주소 또는 0.01도 이내 좌표)
 2. 같은 유형의 제보가 반복되는 경우
 3. 심각도가 'high'인 제보가 여러 건인 경우
 4. 특정 키워드가 반복 출현하는 경우
+
+**중요: 모든 분석과 설명에서 "용인시" 또는 "용인 지역"이라고 명시해주세요. 다른 지역명(예: 서울, 경기도 등)을 언급하지 마세요.**
 
 다음 JSON 형식으로 응답해주세요:
 {
   "anomalies": [
     {
       "type": "cluster" | "repeated_type" | "high_severity" | "keyword_pattern",
-      "description": "이상 패턴 설명 (한글, 100자 이내)",
+      "description": "이상 패턴 설명 (한글, 100자 이내, 용인시 맥락 포함)",
       "severity": "low" | "medium" | "high",
       "affected_reports": ["report_id1", "report_id2"],
       "recommendation": "조치 권장사항 (한글, 100자 이내)"
     }
   ],
-  "summary": "전체 요약 (한글, 200자 이내)"
+  "summary": "전체 요약 (한글, 200자 이내, 용인시 맥락 포함)"
 }
 
 JSON만 응답해주세요.`;
