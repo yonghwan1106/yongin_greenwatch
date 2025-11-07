@@ -22,6 +22,8 @@ function MapContent() {
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [reports, setReports] = useState<any[]>([]);
   const [showReports, setShowReports] = useState(true);
+  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
 
   // 카카오맵 스크립트 로드
   useEffect(() => {
@@ -195,15 +197,53 @@ function MapContent() {
           </button>
           <button
             onClick={() => {
-              if (map && location) {
-                const moveLatLon = new window.kakao.maps.LatLng(location.lat, location.lng);
-                map.setCenter(moveLatLon);
-                map.setLevel(5);
+              if (!map) return;
+
+              setIsLocating(true);
+
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                  (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    setUserLocation({ lat, lng });
+
+                    const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
+                    map.setCenter(moveLatLon);
+                    map.setLevel(5);
+
+                    // 내 위치 마커 추가
+                    new window.kakao.maps.Marker({
+                      position: moveLatLon,
+                      map: map,
+                      image: new window.kakao.maps.MarkerImage(
+                        'data:image/svg+xml;base64,' + btoa(`
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="8" fill="#4285F4"/>
+                            <circle cx="12" cy="12" r="4" fill="white"/>
+                          </svg>
+                        `),
+                        new window.kakao.maps.Size(24, 24)
+                      )
+                    });
+
+                    setIsLocating(false);
+                  },
+                  (error) => {
+                    console.error('위치 가져오기 실패:', error);
+                    alert('위치 정보를 가져올 수 없습니다. 브라우저 설정을 확인해주세요.');
+                    setIsLocating(false);
+                  }
+                );
+              } else {
+                alert('이 브라우저는 위치 서비스를 지원하지 않습니다.');
+                setIsLocating(false);
               }
             }}
-            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm font-medium hover:bg-secondary/80 transition"
+            disabled={isLocating}
+            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full text-sm font-medium hover:bg-secondary/80 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            내 위치
+            {isLocating ? '위치 확인 중...' : '내 위치'}
           </button>
         </div>
       </div>
