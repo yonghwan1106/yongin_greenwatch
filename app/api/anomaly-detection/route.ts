@@ -13,9 +13,9 @@ export async function GET(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // 최근 7일간의 제보 데이터 조회
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    // 최근 30일간의 제보 데이터 조회
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     const { data: recentReports, error } = await supabase
       .from('reports')
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
           keywords
         )
       `)
-      .gte('created_at', sevenDaysAgo.toISOString())
+      .gte('created_at', thirtyDaysAgo.toISOString())
       .order('created_at', { ascending: false });
 
     if (error) throw error;
@@ -41,12 +41,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         success: true,
         anomalies: [],
-        summary: '최근 7일간 제보가 없습니다.',
+        summary: '최근 30일간 제보가 없습니다.',
+        report_count: 0,
+        period: '최근 30일',
       });
     }
 
     // Claude에게 패턴 분석 요청
-    const analysisPrompt = `당신은 경기도 용인시의 환경 데이터 분석 전문가입니다. 다음은 용인시에서 최근 7일간 접수된 환경 제보 데이터입니다:
+    const analysisPrompt = `당신은 경기도 용인시의 환경 데이터 분석 전문가입니다. 다음은 용인시에서 최근 30일간 접수된 환경 제보 데이터입니다:
 
 ${JSON.stringify(recentReports, null, 2)}
 
@@ -107,7 +109,7 @@ JSON만 응답해주세요.`;
       success: true,
       ...analysisResult,
       report_count: recentReports.length,
-      period: '최근 7일',
+      period: '최근 30일',
     });
   } catch (error: any) {
     console.error('Anomaly detection error:', error);
